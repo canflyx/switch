@@ -1,0 +1,6 @@
+flask
+flask-sqlalchemy
+flask_script
+pexpect
+python3-nmap
+flask-apscheduler

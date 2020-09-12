@@ -1,0 +1,52 @@
+{% extends "common/layout_main.html" %}
+{% block content %}
+<div class="row  border-bottom">
+    <div class="col-lg-12">
+        <div class="tab_title">
+            <ul class="nav nav-pills">
+                <li class="current">
+                    <a href="/mon/">返回主页</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="row m-t  wrap_account_set">
+	<div class="col-lg-12">
+		<h3 class="text-center">重点监控设置</h3>
+               <div class="hr-line-dashed"></div>
+			    <div class="form-group">
+				<label class="col-lg-2 control-label">IP地址:</label>
+				   <div class="col-lg-10">
+					<textarea  name="ipaddr" class="form-control" rows='5' placeholder="请监控ip地址~~" >{{ info.ipaddr }}</textarea>
+				</div>
+                <label class="col-lg-2 control-label"></label>
+				   <div class="col-lg-10">
+                <span class="help-block">IP地址必须以','分隔或每行一个，如：192.168.2.1,192.168.2.2</span>
+                   </div>
+                </div>
+        <div class="hr-line-dashed"></div>
+			<div class="form-group">
+				<label class="col-lg-2 control-label">备注:</label>
+				<div class="col-lg-10">
+					<input type="text" name="note" class="form-control" autocomplete="off" placeholder="请输入备注~~" value="{{ info.note }}">
+				</div>
+
+			</div>
+
+            <p></p>
+
+			<div class="hr-line-dashed"></div>
+			<div class="form-group">
+
+				<div class="col-lg-4 col-lg-offset-2">
+
+   					<button class="btn btn-w-m btn-outline btn-primary save">保存</button>
+				</div>
+			</div>
+	</div>
+</div>
+{% endblock %}
+{% block js %}
+    <script src="{{ buildStaticUrl('/js/mon/set.js') }}"></script>
+{% endblock %}
