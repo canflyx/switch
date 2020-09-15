@@ -12,6 +12,34 @@
             </div><hr>
 <div class="row">
     <div class="col-lg-12">
+          <form class="form-inline warp_cron"  >
+            <div class="row  m-t p-w-m">
+                <div class="form-group">
+
+                       选择扫描间隔：
+                        <select name="times"   id="crontime" style="height:30px;outline:0;">
+                   <option value="1">1分钟</option>
+                   <option value="2">2分钟</option>
+                   <option value="3">3分钟</option>
+                   <option value="5">5分钟</option>
+                   <option value="10">10分钟</option>
+                   <option value="30">30分钟</option>
+
+               </select>
+                      <div class="input-group">
+                        <span class="input-group-btn">
+                            <button type="button" class="btn  btn-primary start" >
+                                <i class="fa fa-play"></i>开启
+                            </button>
+                            <button type="button" class="btn  btn-primary stop">
+                                <i class="fa fa-stop"></i>关闭
+                            </button>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <hr>
+        </form>
         <table class="table table-bordered m-t">
             <thead>
             <tr>
@@ -29,7 +57,7 @@
                 <td> <img src={% if item.isok ==1 %}{{ buildStaticUrl("/images/green.png")}}{% else %}{{ buildStaticUrl("/images/red.png")}}{% endif %} height="30" width="30" ></td>
                 <td>{{ item.update_time }}</td>
                 <td>
-                    <a href="{{ buildUrl('/mon/info') }}?Id={{ item.id  }}">
+                    <a href="{{ buildUrl('/mon/info') }}?id={{ item.id  }}">
                         <i class="fa fa-eye fa-lg"></i>
                     </a>
                     <a class="m-l remove" href="javascript:void(0);" data="{{ item.id  }}">

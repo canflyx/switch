@@ -5,8 +5,13 @@ var account_index_ops = {
     },
     eventBind:function(){
         var that = this;
-        $(".wrap_search .search").click(function(){
-            $(".wrap_search").submit();
+        $(".warp_cron .start").click(function(){
+              // $(".warp_cron").submit();
+            var times=$("#crontime").val();
+            that.cron( "start",times );
+        });
+        $(".warp_cron .stop").click(function(){
+            that.cron( "stop");
         });
 
         $(".remove").click( function(){
@@ -39,8 +44,27 @@ var account_index_ops = {
             'cancel':null
         };
         common_ops.confirm( ( act == "remove" ? "确定删除？":"确定恢复？" ), callback );
-    }
-
+    },
+    cron:function( act, times){
+         $.ajax({
+            url:"/mon/cron",
+            type:'POST',
+            data:{
+                act:act,
+                time:times
+            },
+            dataType:'json',
+            success:function( res ){
+                var callback = null;
+                if( res.code == 200 ){
+                    callback = function(){
+                        window.location.href = window.location.href;
+                    }
+                }
+                common_ops.alert( res.msg,callback );
+            }
+        });
+     }
 };
 
 $(document).ready( function(){

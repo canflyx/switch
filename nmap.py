@@ -1,6 +1,7 @@
 import nmap3
 
 from application import app, db
+from common.models.MonLog import MonLog
 from common.models.Monitor import Monitor
 from common.Helper import getCurrentDate
 
@@ -8,12 +9,11 @@ def nmap():
     with app.app_context():
 
         info = Monitor.query.all()
-        print(info.id)
         if info is None:
             exit(1)
         ip = ''
         for item in info:
-            ip = ip + item.IpAdd + ' '
+            ip = ip + item.ipaddr + ' '
         nmap = nmap3.NmapHostDiscovery(
         )
         results = nmap.nmap_no_portscan(ip)
@@ -22,7 +22,7 @@ def nmap():
             [{'isok': '0'}]
         )
         db.session.commit()
-        if results:
+        if results is None:
             exit(1)
         for i in range(0, len(results['hosts'])):
             ip = results['hosts'][i]['addr']
@@ -32,5 +32,10 @@ def nmap():
                 mon.update_time = getCurrentDate()
                 mon.isok = status
                 db.session.add(mon)
+                db.session.execute(
+                    MonLog.__table__.insert(),
+                    [{'mon_id': mon.id, 'update_time': getCurrentDate()}]
+                )
                 db.session.commit()
 
+nmap()

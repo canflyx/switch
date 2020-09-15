@@ -60,3 +60,5 @@ from flask import Blueprint,  request, jsonify
 #         mon.IsOk=status
 #         db.session.add(mon)
 #         db.session.commit()
+
+

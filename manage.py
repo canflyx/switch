@@ -1,9 +1,5 @@
-from apscheduler.schedulers.background import BackgroundScheduler
-from flask_apscheduler import APScheduler
-
 from application import app, manager
 from flask_script import Server
-from jobs.nmap import nmap
 import www
 
 manager.add_command("runserver",
@@ -11,10 +7,6 @@ manager.add_command("runserver",
 app.config['JSON_AS_ASCII'] = False
 
 
-
-
-def print_job():
-    nmap()
 def main():
     # app.config['JOBS']
     # scheduler = APScheduler()
@@ -23,10 +15,10 @@ def main():
     manager.run()
 
 
-
 if __name__ == '__main__':
     try:
         import sys
+
         sys.exit(main())
     except Exception as e:
         import traceback

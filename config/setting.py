@@ -21,3 +21,4 @@ JOBS = [
         'seconds': 20
     }]
 SCHEDULER_API_ENABLED = True
+COMM_NAME = "Crontab_Job"

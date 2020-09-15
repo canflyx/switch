@@ -13,3 +13,4 @@ class Monitor(db.Model):
     create_time = db.Column(db.Text)
     update_time = db.Column(db.Text)
     isok = db.Column(db.Integer)
+    note = db.Column(db.Text)

@@ -11,7 +11,6 @@ def ops_render(template, context={}):
     return render_template(template, **context)
 
 
-
 '''
 自定义分页类
 '''
@@ -62,3 +61,9 @@ def iPagination(params):
     ret['total'] = total
     ret['range'] = range(ret['from'], ret['end'] + 1)
     return ret
+
+
+def get_time(crtime):
+    x1 = '*' if crtime > 60 else '*/'+str(crtime)
+    x2 = '*' if crtime < 60 else '*/'+str(crtime//60)
+    return x1 + ' ' + x2 + ' * * *'
