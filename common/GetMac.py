@@ -67,7 +67,6 @@ class GetMac():
                     db.session.add(mac_info)
                     db.session.commit()
                 else:
-
                     db.session.execute(
                         MAC.__table__.insert(),
                         [{'port': a[key], 'macadd': key, 'swip': ip, 'update_time': getCurrentDate()}]
@@ -76,19 +75,18 @@ class GetMac():
         return True
 
     def __telnetdo(self, HOST, USER, PASS, COMMAND):
-        print(HOST, USER, PASS, COMMAND)
         if not HOST:
             return
         try:
             import telnetlib
-            tn = telnetlib.Telnet(HOST, timeout=10)
+            tn = telnetlib.Telnet(HOST, timeout=5)
             # with telnetlib.Telnet(HOST, timeout=10) as tn:
             tn.set_debuglevel(2)
-            tn.read_until(b"Username:", timeout=5)
+            tn.read_until(b"Username:", timeout=3)
             tn.write(USER.encode('ascii') + b'\n')
             if PASS:
                 # msg.append(tn.expect(['Password:'], 5))
-                tn.read_until(b"Password:", timeout=5)
+                tn.read_until(b"Password:", timeout=3)
                 tn.write(PASS.encode('ascii') + b'\n')
                 # msg.append(tn.expect([USER], 5))
             tn.read_until(b'[Y/N]:', timeout=2)

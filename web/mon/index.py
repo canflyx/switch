@@ -114,7 +114,6 @@ def cron():
         return jsonify(resp)
     time_str = get_time(int(crontime))
     cmmand_line = re.findall('([\S]*?)web', os.path.abspath(__file__))[0] + '/cron.sh'
-    print(cmmand_line+time_str+commont_name+user)
     crontab_update.del_crontab_jobs(commont_name, user)
     crontab_update.add_crontab_job(cmmand_line, time_str, commont_name, user)
     return jsonify(resp)

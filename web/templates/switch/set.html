@@ -14,8 +14,9 @@
 <div class="row m-t  wrap_account_set">
 	<div class="col-lg-12">
 		<h3 class="text-center">交换机管理设置</h3>
-               <div class="hr-line-dashed"></div>
+               
 			    <div class="form-group">
+				<div class="hr-line-dashed"></div>
 				<label class="col-lg-2 control-label">IP地址:</label>
 				   <div class="col-lg-10">
 					<textarea  name="ipaddr" class="form-control" rows='5' placeholder="请输入管理ip地址~~" {% if info  %}readonly="readonly"{% endif %}>{{ info.ipaddr }}</textarea>
@@ -26,11 +27,12 @@
                    </div>
                 </div>
 
-			<div class="hr-line-dashed"></div>
 			<div class="form-group">
+						<div class="hr-line-dashed"></div>
+
 				<label class="col-lg-2 control-label">是否核心交换机:</label>
 				<div class="checkbox-inline">
-					<input class="radio-inline" type="radio" name="iscore" class="form-control" {% if info.iscore==0%}checked{%endif%}  value="0">不是</input>
+					<input class="radio-inline" type="radio" name="iscore" class="form-control" {% if info.iscore!=1%}checked{%endif%}  value="0">不是</input>
 					<input  class="radio-inline"  type="radio" name="iscore" class="form-control"{%  if info.iscore==1%}checked{%endif%}  value="1">是</input>
 					</div>
             </div>

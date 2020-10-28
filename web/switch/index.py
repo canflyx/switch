@@ -16,8 +16,8 @@ route_sw = Blueprint('sw_page', __name__)
 @route_sw.route('/')
 def index():
     resp_data = {}
-    info = Sw.query.all()
-    resp_data['info'] = info
+    sw_info = Sw.query.all()
+    resp_data['info'] = sw_info
     return ops_render('switch/index.html', resp_data)
 
 
@@ -61,27 +61,35 @@ def set():
             model_sw = sw_info
         else:
             model_sw = Sw()
-        model_sw.IsCore = iscore
-        model_sw.User = login_name
-        model_sw.Note = note
-        model_sw.CreateTime = getCurrentDate()
+        model_sw.iscore = iscore
+        model_sw.user = login_name
+        model_sw.note = note
+        model_sw.create_time = getCurrentDate()
         if login_pwd != default_pwd:
-            model_sw.Passwd = login_pwd
+            model_sw.passwd = login_pwd
         db.session.add(model_sw)
         db.session.commit()
         return jsonify(resp)
 
     for item in json.loads(swip):
-        has_in = Sw.query.filter(Sw.ipaddr == item, Sw.id != id).first()
+        has_in = Sw.query.filter_by(ipaddress=item).first()
         if has_in:
             resp['code'] = -1
             resp['msg'] = '交换机%s已存在，请更改' % item
             return jsonify(resp)
-        db.session.execute(
-            Sw.__table__.insert(),
-            [{'Passwd': login_pwd, 'User': login_name, 'Ipaddr': item, 'iscore': iscore,
-              'create_time': getCurrentDate()}]
-        )
+        # db.session.execute(
+        #     Sw.__table__.insert(),
+        #     [{'Passwd': login_pwd, 'User': login_name, 'Ipaddr': item, 'iscore': iscore,
+        #       'create_time': getCurrentDate()}]
+        # )
+        info = Sw()
+        info.iscore = iscore
+        info.user = login_name
+        info.note = note
+        info.passwd = login_pwd
+        info.create_time = getCurrentDate()
+        info.ipaddr = item
+        db.session.add(info)
         db.session.commit()
     return jsonify(resp)
 
