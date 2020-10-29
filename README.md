@@ -12,7 +12,7 @@
 2.  解压至某目录如：
 
    ```
-   d:\switch
+    d:\switch
    ```
 
    
@@ -35,7 +35,7 @@
    
 
 5. 运行系统
-    
+   
     ```
     python manage.py runserver
     ```
@@ -59,7 +59,8 @@
 
    ```
    python manage.py runserver
-   
+   or   
+   uwsgi --ini sw/uwsgi.ini                                              
    ```
    
    如果使用uwsgi或长期运行，uwsgi.ini为uwsgi运行文件。其它请参考网上其它flask创建配置。    
