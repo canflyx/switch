@@ -1,9 +1,9 @@
 # 程序介绍
 ​	本程序通过交换机的登陆获取对应的ARP地址，MAC地址等信息，方便管理员快速查找端口对应的IP地址或根据IP找到对应的交换机。本系统数据库文件使用sqlite系统。配置文件详见/config/setting.py文件
 
-​	mac地址、交换机扫描可同时运行于windows和linux，主机监控只能运行于Linux，依赖于Linux的nmap,crontab包。远程主机依赖telnetlib
+​	mac地址、交换机扫描可同时运行于windows和linux，主机监控只能运行于Linux，依赖于Linux的nmap,crontab包。远程登陆依赖于telnetlib包
 
- **​        提示：交换机扫描未使用异步（异步要使用redis,celery等，对于一款工具软件实在太臃肿了），请点击后根据扫描交换机的多少不要离开扫描页面，太早离开会导致扫描失败。** 
+ **​        提示：交换机扫描未使用同步（异步要使用redis,celery等软件包，对于一款工具软件有些臃肿），扫描交换的时候根据扫描交换机的多少须停留在此页面，过早离开会导致扫描不完全。** 
 
 ## windows安装：
 
