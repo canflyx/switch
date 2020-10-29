@@ -4,7 +4,7 @@
 ​	mac地址、交换机扫描可同时运行于windows和linux，主机监控只能运行于Linux，依赖于Linux的nmap,crontab包。远程登陆依赖于telnetlib包
 
  **​        提示：交换机扫描使用同步运行（异步需要依赖第三方redis,celery等软件，对于一款工具软件有些臃肿），扫描交换的时候根据扫描交换机的多少须停留在此页面，过早离开会导致扫描不完全。** 
-
+    感谢**编程浪子**的《Python Flask构建微信小程序订餐系统》等相关视频。手艺粗糙,技术肤浅，不适合老鸟、傻X
 ## windows安装：
 
 1. 安装python3,pip，并配置path,详细baidu，google
