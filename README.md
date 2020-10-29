@@ -53,3 +53,17 @@
     - ARP_COMM  核心交换机命令  获取MAC对应IP地址
 
 - 程序入口 manage.py
+
+界面预览：
+主界面
+![avatar](readme/index.png)
+搜索
+![avatar](readme/index-mac.png)
+交换机界面
+![avatar](readme/sw-index.png)
+交换机信息
+![avatar](readme/sw-info.png)
+交换机添加
+![avatar](readme/sw-add.png)
+监控界面
+![avatar](readme/mon-index.png)
