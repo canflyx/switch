@@ -27,6 +27,7 @@ var swip_edit_ops = {
             login_name=login_name_target.val()
             var login_pwd_target = $(".wrap_account_set input[name=login_pwd]");
             login_pwd=login_pwd_target.val()
+            var iscore = $("#iscore").is(":checked") ? 1:0
 
             var adlist=ipaddr.split(/[(\r\n\s)\r\n\s]|,!，+/);
             adlist.forEach((item,index)=>{
@@ -60,7 +61,7 @@ var swip_edit_ops = {
                 login_pwd:login_pwd,
                 note:$(".wrap_account_set input[name=note]").val(),
                 id:$(".wrap_account_set input[name=id]").val(),
-                iscore:$(".wrap_account_set [name=iscore]:checked").val()
+                iscore: iscore ,
             }
             $.ajax({
                 url:common_ops.buildUrl("/switch/set"),

@@ -72,7 +72,7 @@ def set():
         return jsonify(resp)
 
     for item in json.loads(swip):
-        has_in = Sw.query.filter_by(ipaddress=item).first()
+        has_in = Sw.query.filter_by(ipaddr=item).first()
         if has_in:
             resp['code'] = -1
             resp['msg'] = '交换机%s已存在，请更改' % item
