@@ -11,34 +11,57 @@
 
 2.  解压至某目录如：
 
+   ```
    d:\switch
+   ```
+
+   
 
 3. 安装python虚拟环境如:
 
+   ```
    python3 -m venv sw-env
+   ```
+
+   
 
 4. 进入虚拟目录并安装组件
 
+   ```
    sw-env\Scripts\activate.bat
    pip install -r requirements.txt
+   ```
+
+   
 
 5. 运行系统
+    
+    ```
     python manage.py runserver
+    ```
+    
     如果使用uwsgi或长期运行，请参考网上其它flask创建配置。
+    
 
 ## ubuntu,debian安装
 
 1. 安装python3环境及组件
 
-   sudo apt install python3 pip nmap
+   ```
+   sudo apt install python3 pip nmap 
+   ```
 
-2. 安装虚拟环境及组件
+   安装虚拟环境及组件
 
    参考windows 3-4安装步骤，自行baidu,google   
 
 3. 运行系统
 
+   ```
    python manage.py runserver
+   
+   ```
+   
    如果使用uwsgi或长期运行，uwsgi.ini为uwsgi运行文件。其它请参考网上其它flask创建配置。    
 
 
