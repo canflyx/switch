@@ -58,7 +58,7 @@
 3. 运行系统
 
    ```
-   python manage.py runserver
+   python3 manage.py runserver
    or   
    uwsgi --ini sw/uwsgi.ini                                              
    ```
