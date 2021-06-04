@@ -120,7 +120,7 @@ def ops():
 
 @route_sw.route('/scan', methods=['POST'])
 def scan():
-    resp = {'code': 200, 'msg': '扫描完成', 'data': {}}
+    resp = {'code': 200, 'msg': '后台开始扫描,请稍后再试！', 'data': {}}
     req = request.values
     swid = req['id'] if 'id' in req or 'id' == None else 0
 
