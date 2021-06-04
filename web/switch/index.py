@@ -129,7 +129,9 @@ def scan():
         resp['msg'] = '没有需要扫描的交换机'
         return resp
     getmac = GetMac()
-    getmac.get(json.loads(swid))
+    getmac.threads(json.loads(swid))
+
+
     # for item in json.loads(swid):
     #     if item is None:
     #         continue

@@ -3,6 +3,7 @@ import os
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from flask_script import Manager
+from flask_executor import Executor
 
 
 class Application(Flask):
@@ -15,6 +16,8 @@ class Application(Flask):
 
 db = SQLAlchemy()
 app = Application(__name__, template_folder=os.getcwd() + "/web/templates/")
+EXECUTOR_MAX_WORKERS = 15
+executor = Executor(app)
 manager = Manager(app)
 
 from common.UrlManager import UrlManager

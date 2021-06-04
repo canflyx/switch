@@ -20,7 +20,7 @@
 3. 安装python虚拟环境如:
 
    ```
-   python3 -m venv sw-env
+   python -m venv sw-env
    ```
 
    

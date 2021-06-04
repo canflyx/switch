@@ -2,12 +2,14 @@ import collections
 import sys
 # import pexpect
 import time
+import threading
 
 from common.models.Mac import MAC
 from common.models.Arp import ARP
 from common.Helper import getCurrentDate
-from application import db, app
+from application import db, app,executor
 from common.models.Sw import Sw
+# from concurrent.futures import ThreadPoolExecutor
 
 
 class GetMac():
@@ -74,6 +76,7 @@ class GetMac():
                 db.session.commit()
         return True
 
+# 根据 HOST USER PASS 及 COMMAND 命令参数
     def __telnetdo(self, HOST, USER, PASS, COMMAND):
         if not HOST:
             return
@@ -122,7 +125,31 @@ class GetMac():
         db.session.commit()
         return True
 
-    def get(self, swids):
+    # 对传入的交换机列表 swids 进行处理.
+    # 对处理进行多线程改造
+    def get(self, id,ipaddr,user,passwd,comm,iscore):
+        # for item in swids:
+        #     info = Sw.query.filter_by(id=item).first()
+        #     if info is None:
+        #         continue
+        #     comm = []
+        #     comm.extend(app.config['BASE_COMM'])
+        #     if info.iscore == 0:
+        #         comm.extend(app.config['MAC_COMM'])
+        #     else:
+        #         comm.extend(app.config['ARP_COMM'])
+        resault = self.__telnetdo(ipaddr, user, passwd, comm)
+        if resault.find('GE') < 0 and resault.find('Eth') < 0:
+            self.__status(id, 1)
+            return
+        isok = self.__getformat(resault,ipaddr, iscore)
+        if not isok:
+            self.__status(id, 1)
+            return
+        self.__status(id, 0)
+
+    def threads(self, swids):
+        # t = ThreadPoolExecutor(5)
         for item in swids:
             info = Sw.query.filter_by(id=item).first()
             if info is None:
@@ -133,45 +160,6 @@ class GetMac():
                 comm.extend(app.config['MAC_COMM'])
             else:
                 comm.extend(app.config['ARP_COMM'])
-            resault = self.__telnetdo(info.ipaddr, info.user, info.passwd, comm)
-            if resault.find('GE') < 0 and resault.find('Eth') < 0:
-                self.__status(item, 1)
-                continue
-            isok = self.__getformat(resault, info.ipaddr, info.iscore)
-            if not isok:
-                self.__status(item, 1)
-                continue
-            self.__status(item, 0)
-
-# def telnetdo(HOST=None, USER=None, PASS=None, COMMAND=[]):
-#     if not HOST:
-#         return
-#     cmd='telnet '+HOST
-#     child=pexpect.spawn(cmd,timeout=30)
-#     print('login start')
-#     child.expect('Username:')
-#     child.sendline(USER)
-#     index=child.expect(['Password:',pexpect.EOF,pexpect.TIMEOUT])
-#     if index==0:
-#         child.sendline(PASS)
-#         index=child.expect(['fail',']:','>'])
-#         if index==0:
-#             print('密码错误')
-#             sys.exit(1)
-#         if index==1:
-#             child.sendline('n')
-#             child.sendline('sys')
-#         if index==2:
-#             child.sendline('sys')
-#         print('密码验证完成')
-#         for i in COMMAND:
-#             child.expect(']')
-#             child.sendline(i.encode('ascii'))
-#
-#         f=child.logfile
-#         child.expect(']')
-#         child.sendline('quit')
-#         child.expect(']')
-#         child.sendline('quit')
-#         child.sendline('quit')
-#     return f
+            # t.submit(self.get,(item,info.ipaddr, info.user, info.passwd, comm,info.iscore))
+            executor.submit(self.get,item,info.ipaddr, info.user, info.passwd, comm,info.iscore)
+            # self.get(item,info.ipaddr, info.user, info.passwd, comm,info.iscore)
