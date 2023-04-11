@@ -1,4 +1,8 @@
 # 程序介绍
+重新用 GO+VUE 写了一个桌面可运行程序。就不用部署服务器啥的了。
+
+https://github.com/canflyx/gosw/
+
 ​	本程序通过交换机的登陆获取对应的ARP地址，MAC地址等信息，方便管理员快速查找端口对应的IP地址或根据IP找到对应的交换机。本系统数据库文件使用sqlite系统。配置文件详见/config/setting.py文件
 
 ​	mac地址、交换机扫描可同时运行于windows和linux，主机监控只能运行于Linux，依赖于Linux的nmap,crontab包。远程登陆依赖于telnetlib包
